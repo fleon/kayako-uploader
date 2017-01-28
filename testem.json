@@ -1,0 +1,10 @@
+{
+  "framework": "jasmine2",
+  "src_files": [
+  	"src/flatten-array.js",
+  	"src/file-uploader.js",
+  	"test/flatten-array.spec.js",
+  	"test/file-uploader.spec.js"
+  ],
+  "launch_in_ci": ["Chrome"]
+}

@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+<head>
+<style>
+
+</style>
+</head>
+<body>
+<div id="file-uploader">
+	<button onclick="fileUploader.browse()">BROWSE</button>
+	<button onclick="fileUploader.upload()">UPLOAD</button>
+	<div id="preview-container"></div>
+</div>
+
+<script src="../src/file-uploader.js"></script>
+<script>
+var container = document.getElementById('file-uploader')
+var previewContainer = document.getElementById('preview-container')
+
+var fileUploader = new FileUploader({
+	container: container,
+	previewContainer: previewContainer,
+	multiple: true,
+	accept: 'image/*',
+	uploadURL: 'someurl.php',
+	filesParam: 'photos',
+	extraData: {
+		userId: 3535
+	}
+})
+
+</script>
+</body>
+</html>
