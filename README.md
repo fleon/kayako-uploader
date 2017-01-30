@@ -23,16 +23,6 @@ See `example/index.html` file in the repository for a usage example.
 
 ## Supported options
 
-container: container,
-	previewContainer: previewContainer,
-	multiple: true,
-	accept: 'image/*',
-	uploadURL: 'someurl.php',
-	filesParam: 'photos',
-	extraData: {
-		userId: 3535
-	}
-
 - **container** (`Element`): The container element node to append the uploader in.
 - **previewContainer** (`Element`) The container element node to append the preview images and text of selected files to.
 - **accept** (`Array|String`): An array or string containing list of accepted mime types. Example: `image/*, image/png, application/json`.
