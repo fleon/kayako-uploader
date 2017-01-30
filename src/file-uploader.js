@@ -54,23 +54,29 @@ FileUploader.defaultConfig = {
 }
 
 FileUploader.prototype = {
-	appendTo: function (container) {
+	createInput: function (config) {
+		config = config || {}
+
 		var markup = '<input type="file" style="display:none"'
-		if (this.config.multiple)
+		if (config.multiple)
 			markup += ' multiple'
-		if (this.config.accept instanceof Array)
-			markup += ' accept="' + this.config.accept.join(', ') + '"'
-		else if (typeof this.config.accept === 'string')
-			markup += ' accept="' + this.config.accept + '"'
+		if (config.accept instanceof Array)
+			markup += ' accept="' + config.accept.join(', ') + '"'
+		else if (typeof config.accept === 'string')
+			markup += ' accept="' + config.accept + '"'
 		markup += '>'
 
 		var div = document.createElement('div')
 		div.innerHTML = markup
 
-		var input = this.input = div.firstChild
-		var self = this
+		this.input = div.firstChild
+	},
 
-		input.addEventListener('change', function () {
+	appendTo: function (container) {
+		var self = this
+		this.createInput(this.config)
+
+		this.input.addEventListener('change', function () {
 			self.files = this.files
 			self.showPreviews()
 		})
@@ -95,11 +101,11 @@ FileUploader.prototype = {
 			var previewDiv = document.createElement('div')
 
 			if (/^image\//.test(file.type)) {
-				var img = document.createElement('img');
-				img.src = window.URL.createObjectURL(file);
-				img.height = 60;
+				var img = document.createElement('img')
+				img.src = window.URL.createObjectURL(file)
+				img.height = 60
 				img.onload = function() {
-					window.URL.revokeObjectURL(this.src);
+					window.URL.revokeObjectURL(this.src)
 				}
 				previewDiv.appendChild(img)
 			}
@@ -109,7 +115,7 @@ FileUploader.prototype = {
 
 			previewDiv.appendChild(metaDiv)
 			previewContainer.appendChild(previewDiv)
-		}, this)
+		})
 	},
 
 	browse: function () {
@@ -119,7 +125,7 @@ FileUploader.prototype = {
 	upload: function () {
 		var data = new FormData()
 		forEach(this.files, function (file) {
-			data.append(this.config.filesParam + '[]', file, file.name);
+			data.append(this.config.filesParam + '[]', file, file.name)
 		}, this)
 
 		forEach(this.config.extraData, function (value, key) {
@@ -130,9 +136,9 @@ FileUploader.prototype = {
 		xhr.open('POST', this.config.uploadURL, true)
 		xhr.onload = function () {
 			if (xhr.status === 200) {
-				alert('Upload successful!')
+				window.alert('Upload successful!')
 			} else {
-				alert('An error occurred!')
+				window.alert('An error occurred!')
 			}
 		}
 

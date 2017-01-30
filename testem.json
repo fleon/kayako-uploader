@@ -1,6 +1,7 @@
 {
   "framework": "jasmine2",
   "src_files": [
+  	"node_modules/jasmine-ajax/lib/mock-ajax.js",
   	"src/flatten-array.js",
   	"src/file-uploader.js",
   	"test/flatten-array.spec.js",
